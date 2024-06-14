@@ -33,7 +33,7 @@ jobs:
         with:
             scan-type: 'config'
             format: 'sarif'
-            output: 'trivy-dockerfile-results.sarif'
+            output: 'resultados/trivy-dockerfile-results.sarif'
             exit-code: 0
             severity: UNKNOWN,CRITICAL,HIGH,MEDIUM,LOW
         
@@ -56,18 +56,17 @@ jobs:
       - name: Scan das Imagens Docker
         uses: aquasecurity/trivy-action@0.16.1
         with:
-          image-ref: fabricioveronez/conversao-temperatura:v${{ github.run_number }}
+          image-ref: fabricioveronez/conversao-temperatura-aula:v${{ github.run_number }}
           scan-type: 'image'
           format: 'sarif'
-          output: 'trivy-results.sarif'
+          output: 'resultados/trivy-dockerimage-results.sarif'
           exit-code: 0
           severity: UNKNOWN,CRITICAL,HIGH,MEDIUM,LOW
 
     
-      
-    #   - name: Upload Trivy scan results to GitHub Security tab
-    #     uses: github/codeql-action/upload-sarif@v3
-    #     with:
-    #       sarif_file: 'trivy-results.sarif'
+      - uses: actions/upload-artifact@v4
+        with:
+            name: qualidade
+            path: resultado
 
     
