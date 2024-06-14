@@ -23,12 +23,12 @@ jobs:
     #   - name: Execução de Teste Unitário
     #     run: npm test
     #     working-directory: ./src
-
+      - run: mkdir resultados
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: ./src/Dockerfile
-
-      - run: mkdir resultados
+          output-file: resultados/hadolint-dockerimage-results.sarif'
+          format: sarif
 
       - name: Configuração de Dockerfile
         uses: aquasecurity/trivy-action@0.16.1
