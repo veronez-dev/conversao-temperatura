@@ -28,6 +28,8 @@ jobs:
         with:
           dockerfile: ./src/Dockerfile
 
+      - run: mkdir resultado
+
       - name: Configuração de Dockerfile
         uses: aquasecurity/trivy-action@0.16.1
         with:
