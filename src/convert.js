@@ -1,7 +1,5 @@
-exports.celsiusFahrenheit = (valor) => {
-    return ((valor * 9) / 5) + 32
-};
+const celsiusFahrenheit = valor => ((valor * 9) / 5) + 32;
 
-exports.fahrenheitCelsius = (valor) => {
-    return ((valor - 32) * 5) / 9;
-};
+const fahrenheitCelsius = valor => ((valor - 32) * 5) / 9;
+
+export { celsiusFahrenheit, fahrenheitCelsius };

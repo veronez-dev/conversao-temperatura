@@ -1,6 +1,8 @@
-var express = require('express');
-var router = express.Router();
-const NodeHog = require('nodehog');
+
+import express from 'express';
+import nodehog from 'nodehog';
+
+const router = express.Router();
 
 let isHealth = true;
 let readTime = new Date(Date.now());
@@ -14,7 +16,7 @@ router.put('/stress/tempo/:tempoStress/intervalo/:intervalo/ciclos/:ciclos', (re
     const tempoStress = req.params.tempoStress * 1000;
     const tempoFolga = req.params.tempoFolga * 1000;
     const ciclos = req.params.ciclos;
-    new NodeHog(elemento, tempoStress, tempoFolga, ciclos).start();
+    new nodehog(elemento, tempoStress, tempoFolga, ciclos).start();
     res.send("OK");
 });
 
@@ -57,5 +59,4 @@ var healthMid = function (req, res, next) {
     }   
 };
 
-exports.routers = router;
-exports.middlewares = { healthMid};
+export { router, healthMid };

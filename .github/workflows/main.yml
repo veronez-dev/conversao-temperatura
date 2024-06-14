@@ -17,10 +17,12 @@ jobs:
           node-version: 18.x
 
       - name: Instalação do ESLint
-        run: npm install -g eslint 
+        run: npm install -g eslint
+        
 
       - name: ESLint
-        run: eslint ./src --ext .js,.jsx,.ts,.tsx
+        run: eslint 
+        working-directory: ./src
 
     #   - name: Instalação de dependencias
     #     run: npm install

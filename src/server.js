@@ -1,49 +1,52 @@
-const express = require('express');
-const os = require('os')
-const app = express();
-const conversor = require('./convert')
-const bodyParser = require('body-parser');
-const config = require('./config/system-life');
-const path = require('path');
+import express from 'express';
+import os from 'os';
+import {celsiusFahrenheit, fahrenheitCelsius} from './convert.js';
+import bodyParser from 'body-parser';
+import { router, healthMid } from './config/system-life.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-app.use(config.middlewares.healthMid);
-app.use('/', config.routers);
-app.use(bodyParser.urlencoded({ extended: false }))
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const app = express();
+
+app.use(healthMid);
+app.use('/', router);
+app.use(bodyParser.urlencoded({ extended: false }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/fahrenheit/:valor/celsius', (req, res) => {
-
-    let valor = req.params.valor;
-    let celsius = conversor.fahrenheitCelsius(valor);
-    res.json({ "celsius": celsius, "maquina": os.hostname() });
+    const { valor } = req.params;
+    const celsius = fahrenheitCelsius(valor);
+    res.json({ celsius, maquina: os.hostname() });
 });
 
 app.get('/celsius/:valor/fahrenheit', (req, res) => {
-
-    let valor = req.params.valor;
-    let fahrenheit = conversor.celsiusFahrenheit(valor);
-    res.json({ "fahrenheit": fahrenheit, "maquina": os.hostname() });
+    const { valor } = req.params;
+    const fahrenheit = celsiusFahrenheit(valor);
+    res.json({ fahrenheit, maquina: os.hostname() });
 });
 
 app.get('/', (req, res) => {
-
-    res.render('index',{valorConvertido: '', maquina: os.hostname()});
+    res.render('index', { valorConvertido: '', maquina: os.hostname() });
 });
 
 app.post('/', (req, res) => {
+    const { valorRef, selectTemp } = req.body;
     let resultado = '';
 
-    if (req.body.valorRef) {
-        if (req.body.selectTemp == 1) {
-            resultado = conversor.celsiusFahrenheit(req.body.valorRef)
-        } else {
-            resultado = conversor.fahrenheitCelsius(req.body.valorRef)
-        }
+    if (valorRef) {
+        resultado = selectTemp == 1 
+            ? celsiusFahrenheit(valorRef)
+            : fahrenheitCelsius(valorRef);
     }
 
     res.render('index', {valorConvertido: resultado, "maquina": os.hostname()});
- });
+
+});
 
 app.listen(8080, () => {
     console.log("Servidor rodando na porta 8080");
