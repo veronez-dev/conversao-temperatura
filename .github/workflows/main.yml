@@ -27,7 +27,7 @@ jobs:
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: ./src/Dockerfile
-          output-file: resultados/hadolint-dockerimage-results.sarif'
+          output-file: resultados/hadolint-dockerimage-results.sarif
           format: sarif
 
       - name: Configuração de Dockerfile
