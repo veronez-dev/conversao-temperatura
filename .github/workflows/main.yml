@@ -69,6 +69,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
             name: qualidade
-            path: resultado
+            path: resultados
 
     
