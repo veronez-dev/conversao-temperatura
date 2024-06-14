@@ -68,7 +68,7 @@ jobs:
           severity: UNKNOWN,CRITICAL,HIGH,MEDIUM,LOW
 
       - name: Generate Security Report
-        uses: rsdmike/github-security-report-action@v2
+        uses: rsdmike/github-security-report-action@v3
         with:
           token: ${{ secrets.SECURITY_TOKEN }}
           sarifReportDir: resultados
