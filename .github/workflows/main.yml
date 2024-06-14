@@ -25,14 +25,6 @@ jobs:
         run: eslint -o ../resultados/eslint-resultado.html -f html
         working-directory: ./src
 
-    #   - name: Instalação de dependencias
-    #     run: npm install
-    #     working-directory: ./src
-
-    #   - name: Execução de Teste Unitário
-    #     run: npm test
-    #     working-directory: ./src
-
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: ./src/Dockerfile
@@ -74,10 +66,24 @@ jobs:
           output: 'resultados/trivy-dockerimage-results.sarif'
           exit-code: 0
           severity: UNKNOWN,CRITICAL,HIGH,MEDIUM,LOW
-    
+
+      - name: Generate Security Report
+        uses: rsdmike/github-security-report-action@v2
+        with:
+          token: ${{ secrets.SECURITY_TOKEN }}
+          sarifReportDir: resultados
+          outputDir: resultados
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+            # Path to SARIF file relative to the root of the repository
+          sarif_file: resultados
+          # Optional category for the results
+          # Used to differentiate multiple results for one commit
+          category: ferramentas
+  
       - uses: actions/upload-artifact@v4
         with:
             name: qualidade
             path: resultados
-
-    
