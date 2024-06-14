@@ -25,14 +25,6 @@ jobs:
         run: eslint -o ../resultados/eslint-resultado.html -f html
         working-directory: ./src
 
-    #   - name: Instalação de dependencias
-    #     run: npm install
-    #     working-directory: ./src
-
-    #   - name: Execução de Teste Unitário
-    #     run: npm test
-    #     working-directory: ./src
-
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: ./src/Dockerfile
