@@ -32,7 +32,7 @@ jobs:
           no-fail: true
 
       - name: Configuração de Dockerfile
-        uses: aquasecurity/trivy-action@0.16.1
+        uses: aquasecurity/trivy-action@0.22.0
         with:
             scan-type: 'config'
             format: 'sarif'
@@ -57,7 +57,7 @@ jobs:
             fabricioveronez/conversao-temperatura-aula:latest
 
       - name: Scan das Imagens Docker
-        uses: aquasecurity/trivy-action@0.16.1
+        uses: aquasecurity/trivy-action@0.22.0
         with:
           image-ref: fabricioveronez/conversao-temperatura-aula:v${{ github.run_number }}
           scan-type: 'image'
