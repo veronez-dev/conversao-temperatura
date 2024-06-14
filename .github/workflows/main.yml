@@ -19,9 +19,8 @@ jobs:
       - name: Instalação do ESLint
         run: npm install -g eslint
         
-
       - name: ESLint
-        run: eslint 
+        run: eslint -o ../resultados/eslint-resultado.html -f html
         working-directory: ./src
 
     #   - name: Instalação de dependencias
