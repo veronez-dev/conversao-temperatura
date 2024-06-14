@@ -36,7 +36,6 @@ jobs:
             output: 'trivy-dockerfile-results.sarif'
             exit-code: 0
             severity: UNKNOWN,CRITICAL,HIGH,MEDIUM,LOW
-            scanners: "vuln,misconfig,secret"
         
     #   - name: Docker Login
     #     uses: docker/login-action@v3.1.0
