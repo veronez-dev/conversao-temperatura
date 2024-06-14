@@ -18,6 +18,8 @@ jobs:
 
       - name: Instalação do ESLint
         run: npm install -g eslint
+
+      - run: mkdir resultados
         
       - name: ESLint
         run: eslint -o ../resultados/eslint-resultado.html -f html
@@ -30,7 +32,7 @@ jobs:
     #   - name: Execução de Teste Unitário
     #     run: npm test
     #     working-directory: ./src
-      - run: mkdir resultados
+
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: ./src/Dockerfile
