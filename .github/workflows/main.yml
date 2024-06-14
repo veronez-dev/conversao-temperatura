@@ -41,11 +41,11 @@ jobs:
             exit-code: 0
             severity: UNKNOWN,CRITICAL,HIGH,MEDIUM,LOW
         
-    #   - name: Docker Login
-    #     uses: docker/login-action@v3.1.0
-    #     with:
-    #       username: ${{ secrets.DOCKERHUB_USR }}
-    #       password: ${{ secrets.DOCKERHUB_PWD }}
+      - name: Docker Login
+        uses: docker/login-action@v3.1.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USR }}
+          password: ${{ secrets.DOCKERHUB_PWD }}
         
       - name: Docker build 
         uses: docker/build-push-action@v5.3.0
@@ -70,10 +70,7 @@ jobs:
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
-            # Path to SARIF file relative to the root of the repository
           sarif_file: resultados
-          # Optional category for the results
-          # Used to differentiate multiple results for one commit
           category: ferramentas
   
       - uses: actions/upload-artifact@v4
