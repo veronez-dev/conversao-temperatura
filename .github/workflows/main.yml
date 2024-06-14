@@ -66,10 +66,17 @@ jobs:
           output: 'resultados/trivy-dockerimage-results.sarif'
           exit-code: 0
           severity: UNKNOWN,CRITICAL,HIGH,MEDIUM,LOW
-    
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+            # Path to SARIF file relative to the root of the repository
+          sarif_file: resultados
+          # Optional category for the results
+          # Used to differentiate multiple results for one commit
+          category: ferramentas
+  
       - uses: actions/upload-artifact@v4
         with:
             name: qualidade
             path: resultados
-
-    
