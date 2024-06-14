@@ -1,7 +1,7 @@
-FROM node:18.19.0-alpine3.19
+FROM cgr.dev/chainguard/node
 WORKDIR /app
-COPY package*.json ./
+COPY --chown=node:node package*.json ./
 RUN npm install
-COPY . .
+COPY --chown=node:node . .
 EXPOSE 8080
 CMD ["node", "server.js"]
