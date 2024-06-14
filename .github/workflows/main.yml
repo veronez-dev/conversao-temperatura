@@ -29,6 +29,7 @@ jobs:
           dockerfile: ./src/Dockerfile
           output-file: resultados/hadolint-dockerimage-results.sarif
           format: sarif
+          no-fail: false
 
       - name: Configuração de Dockerfile
         uses: aquasecurity/trivy-action@0.16.1
